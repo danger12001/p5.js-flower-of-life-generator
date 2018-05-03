@@ -1,8 +1,10 @@
 ﻿
 var slider;
-var sizeOfCircle = 50;
+var sizeOfCircle = 25;
 var sliderVal = 1;
 var r, g, b;
+var sizeSlider;
+var sizeText;
 var rval = 1, gval = 1, bval = 1;
 var rtext, gtext, btext;
 var flower;
@@ -13,10 +15,13 @@ function setup() {
     textSize(32);
     flower = createGraphics(500, 500);
     slider = createSlider(1, 15, 1, 1);
+    sizeSlider = createSlider(10, 75, 1, 1);
     r = createSlider(1, 255, 1, 10);
     b = createSlider(1, 255, 1, 10);
     g = createSlider(1, 255, 1, 10);
     slider.position(10, 10);
+    sizeSlider.position(10, 550);
+    sizeText = createElement('p', 'Zoom: ' + sizeOfCircle)
     rtext = createElement('p','R: ' + rval);
     btext = createElement('p', 'B: ' + bval);
     gtext = createElement('p', 'G: ' + gval);
@@ -24,6 +29,7 @@ function setup() {
     b.position(650, 150);
     g.position(650, 200);
     rtext.position(800, 85);
+    sizeText.position(160, 535);
     gtext.position(800, 135);
     btext.position(800, 185);
     slider.style('width', '600px');
@@ -53,7 +59,13 @@ function draw() {
     clear();
     background(200);
     drawPattern(centerX, centerY, sliderVal);
+
+    sizeText.remove();
+    sizeOfCircle = sizeSlider.value();
+    sizeText = createElement('p', 'Zoom: ' + Math.floor(sizeOfCircle /75 * 100) + '%' )
+    sizeText.position(160, 535);
 }
+
 
 function drawPattern(centerX, centerY, val) {
   
